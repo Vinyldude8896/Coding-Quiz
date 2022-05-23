@@ -5,8 +5,8 @@
 :root {
     --primary_text: #333;
     --secondary_text: white;
-    --highlight_color: #CF9FFF;
-    --highlight_text_Bubble: #5D3FD3;
+    --highlight_color: #800080;
+    --highlight_text_Bubble: #452c63;
 }
 
 body {
@@ -15,16 +15,62 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
 
 }
 
 header h1 {
     color: #CF9FFF;
-    font-size: 15px;
-    margin-left: 10px;
+    font-size: 18px;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
 
+}
+
+.timer {
+    color: var(--primary_text);
+}
+
+
+.page-content-start {
+    flex:1;
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    justify-content: center;
+    margin: 30px auto;
+    width: 55%;
+}
+
+.page-content-start h2 {
+    color: var(--primary_text);
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.page-content-start p {
+    font-size: 26.6px;
+    text-align: center;
+    width: 100%;
+
+}
+
+.page-content-start button {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: var(--secondary_text);
+    background-color: var(--highlight_text_Bubble);
+    font-size: 20px;
+    padding: 10px 15px;
 }
