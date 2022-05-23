@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary_text: #333;
+    --secondary_text: white;
+    --highlight_color: #CF9FFF;
+    --highlight_text_Bubble: #5D3FD3;
+}
+
+body {
+  background: #ededed;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header {
+
+}
+
+header h1 {
+    color: #CF9FFF;
+    font-size: 15px;
+    margin-left: 10px;
+
+}
