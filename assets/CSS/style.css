@@ -52,7 +52,7 @@ header h1 {
 
 .page-content-start h2 {
     color: var(--primary_text);
-    font-size: 45px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -73,4 +73,52 @@ header h1 {
     background-color: var(--highlight_text_Bubble);
     font-size: 20px;
     padding: 10px 15px;
+}
+
+
+
+.question-content {
+    /* flex:1; */
+    display: inline;
+    flex-wrap: wrap;
+    /* align-items: left; */
+    justify-content: center;
+    margin: 5px auto;
+    width: 55%;
+}
+
+.question-content  h2 {
+    color: var(--primary_text);
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.question-content button {
+    outline: none;
+    border: none;
+    display: inline;
+    border-radius: 10px;
+    text-align: left;
+    justify-content: left;
+    color: var(--secondary_text);
+    background-color: var(--highlight_text_Bubble);
+    font-size: 15px;
+    padding: 10px 15px;
+}
+
+
+.button:active {
+    cursor: default;
+}
+
+.page-content-start button:hover {
+    background-color: #CF9FFF;
+}
+
+.button:active {
+    cursor: default;
+}
+
+.question-content button:hover {
+    background-color: #CF9FFF;
 }
