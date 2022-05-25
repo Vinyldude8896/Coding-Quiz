@@ -1,6 +1,10 @@
+/* global styling properties */
+
 * {
     box-sizing: border-box;
 }
+
+/* Root Level Styling properties */
 
 :root {
     --primary_text: #333;
@@ -9,6 +13,8 @@
     --highlight_text_Bubble: #452c63;
 }
 
+
+/* Body Style Properties */
 body {
   background: #ededed;
   margin: 0;
@@ -17,6 +23,8 @@ body {
   flex-direction: column;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
+
+/* header properties start */
 
 header {
     display: flex;
@@ -39,6 +47,10 @@ header h1 {
     color: var(--primary_text);
 }
 
+
+/* header properties end */
+
+/* initial starting page properties start */
 
 .page-content-start {
     flex:1;
@@ -75,8 +87,10 @@ header h1 {
     padding: 10px 15px;
 }
 
+/* initial starting page properties end */
 
 
+/* question and answer page properties start */
 .question-content {
     /* flex:1; */
     display: inline;
@@ -106,7 +120,21 @@ header h1 {
     padding: 10px 15px;
 }
 
+/* question and answer page properties start */
 
+/* style for answer headers h3 */
+
+.question-content h3 {
+    font-size: 30px;
+    color: darkgrey;
+    border-top: 3px solid darkgrey;
+
+}
+
+
+
+
+ /* style For Answer Headers ends*/
 .button:active {
     cursor: default;
 }

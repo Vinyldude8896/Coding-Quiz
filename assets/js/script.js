@@ -12,7 +12,7 @@ var Question5 = ["A very useful tool used during development and debugging for p
 var CorrectAnswers = ["3. alerts", "3. parenthesis", "4. all of the above", "3. quotes", "4. console.log"];
 
 // setting cvariable to cycle through questions and set the current question
-var QuestionCycle = 4;
+var QuestionCycle = 0;
 var CurrentQuestion = [];
 
 // set player object - with question, score and initials
@@ -22,6 +22,18 @@ var playerDataObject = {
     initials: "",
 
 }
+
+
+    // Function to clar current answer and questions
+
+    var clearCurrentQuestionAnswers = function () {
+        QuestionPageContent.querySelector("h2").textContent = "";
+        QuestionPageContent.querySelector('.button').style.display = 'none';
+
+        // SetQuizQuestion();
+        // SetQuizAnswers();
+    };
+
     // function to set the questions on the quiz
     var SetQuizQuestion = function () {
 
@@ -73,6 +85,24 @@ var playerDataObject = {
          }
      };
 
+     // function to display Correct message
+
+     var DisplayCorrectMessage = function() {
+        var HeaderCorrectAnswer = document.createElement("h3");
+        HeaderCorrectAnswer.classname = "answer-header";
+        HeaderCorrectAnswer.innerHTML = "Correct!";
+        QuestionPageContent.appendChild(HeaderCorrectAnswer);
+     }
+
+     // function to display Wrong Message
+
+     var DisplayWrongMessage = function () {
+         var HeaderWrongAnswer = document.createElement("h3");
+         HeaderWrongAnswer.className = "answer-header";
+         HeaderWrongAnswer.innerHTML = "Wrong!";
+         QuestionPageContent.appendChild(HeaderWrongAnswer);
+     }
+
     // check for correct answers
      var checkAnswers = function(event) {
         QuestionPageContent.addEventListener("click", function(ButtonName){
@@ -82,14 +112,12 @@ var playerDataObject = {
             console.log("The ID of the button clicked is "+ ButtonID);
 
             if (ButtonID === "3. alerts") {
-                alert("Correct!");
-                QuestionCycle = QuestionCycle + 1;
-
-                SetQuizQuestion();
-                SetQuizAnswers();
+                DisplayCorrectMessage();
+                // QuestionCycle = QuestionCycle +1;
+                // clearCurrentQuestionAnswers();
 
                 } else {
-                alert("Wrong!");
+                DisplayWrongMessage();
                }
             
         });
@@ -116,4 +144,4 @@ var sectionHandler = function () {
 };
 
 startQuizBtn.addEventListener("click", sectionHandler);
-// QuestionPageContent/addEventListener("click", checkAnswers);
+QuestionPageContent/addEventListener("click", checkAnswers);
