@@ -24,15 +24,7 @@ var playerDataObject = {
 }
 
 
-    // Function to clar current answer and questions
 
-    var clearCurrentQuestionAnswers = function () {
-        QuestionPageContent.querySelector("h2").textContent = "";
-        QuestionPageContent.querySelector('.button').style.display = 'none';
-
-        // SetQuizQuestion();
-        // SetQuizAnswers();
-    };
 
     // function to set the questions on the quiz
     var SetQuizQuestion = function () {
@@ -41,25 +33,34 @@ var playerDataObject = {
           if (QuestionCycle === 0) {
             CurrentQuestion = CurrentQuestion.concat(Question1);
         }
-
         if (QuestionCycle === 1) {
+            CurrentQuestion.length = 0;
             CurrentQuestion = CurrentQuestion.concat(Question2);
         }
 
         if (QuestionCycle === 2) {
+            CurrentQuestion.length = 0;
             CurrentQuestion = CurrentQuestion.concat(Question3);
         }
 
         if (QuestionCycle === 3) {
+            CurrentQuestion.length = 0;
             CurrentQuestion = CurrentQuestion.concat(Question4);
         }
 
         if (QuestionCycle === 4) {
+            CurrentQuestion.length = 0;
             CurrentQuestion = CurrentQuestion.concat(Question5);
         }
 
+        if (QuestionCycle > 4 ) {
+        } else {
+            // DisplayEndPage();
+           }
+
         // change header function based on current question
         var QuestionPageHeader = document.createElement("h2");
+        QuestionPageHeader.id = "New Question";
         QuestionPageHeader.classname = "question-content";
         QuestionPageHeader.innerHTML = CurrentQuestion[0];
         QuestionPageContent.appendChild(QuestionPageHeader);
@@ -80,7 +81,7 @@ var playerDataObject = {
        const AnswerButtons = document.createElement("button");
         AnswerButtons.className = "question-content";
         AnswerButtons.innerHTML = CurrentQuestion[i];
-        AnswerButtons.id = CurrentQuestion[i];
+        AnswerButtons.id = "Answer + "+ i;
         QuestionPageContent.appendChild(AnswerButtons);
          }
      };
@@ -90,17 +91,46 @@ var playerDataObject = {
      var DisplayCorrectMessage = function() {
         var HeaderCorrectAnswer = document.createElement("h3");
         HeaderCorrectAnswer.classname = "answer-header";
+        HeaderCorrectAnswer.id = "answer-h3";
         HeaderCorrectAnswer.innerHTML = "Correct!";
         QuestionPageContent.appendChild(HeaderCorrectAnswer);
+        clearCurrentQuestionAnswers();
      }
+
+
+         // Function to clar current answer and questions
+
+    var clearCurrentQuestionAnswers = function () {
+
+        // removing current Question
+        const deleteQuestion = document.getElementById("New Question");
+        deleteQuestion.remove();
+
+        // removing all current answers
+        for (i = 1; i < CurrentQuestion.length; i++) {
+            var deleteAnswer = document.getElementById("Answer + " + i );
+            deleteAnswer.remove();
+        };
+
+        // removing correct/wrong headers
+
+        var deleteAnswerResult = document.getElementById("answer-h3");
+            deleteAnswerResult.remove();
+    
+        SetQuizQuestion();
+        SetQuizAnswers();
+    };
+
 
      // function to display Wrong Message
 
      var DisplayWrongMessage = function () {
          var HeaderWrongAnswer = document.createElement("h3");
          HeaderWrongAnswer.className = "answer-header";
+         HeaderWrongAnswer.id = "answer-h3";
          HeaderWrongAnswer.innerHTML = "Wrong!";
          QuestionPageContent.appendChild(HeaderWrongAnswer);
+         clearCurrentQuestionAnswers();
      }
 
     // check for correct answers
@@ -111,13 +141,19 @@ var playerDataObject = {
 
             console.log("The ID of the button clicked is "+ ButtonID);
 
-            if (ButtonID === "3. alerts") {
+            var CycleCorrectAnswer = QuestionCycle;
+            console.log("The correct answer should be at postion " + CycleCorrectAnswer);
+
+            if (ButtonID === CorrectAnswers[CycleCorrectAnswer]) {
                 DisplayCorrectMessage();
-                // QuestionCycle = QuestionCycle +1;
+                QuestionCycle = QuestionCycle++;
+                console.log(" The Correct answer for the question is " + CorrectAnswers[CycleCorrectAnswer]);
                 // clearCurrentQuestionAnswers();
 
                 } else {
                 DisplayWrongMessage();
+                QuestionCycle = QuestionCycle++;
+                console.log("The current Question Cycle is " + QuestionCycle);
                }
             
         });
