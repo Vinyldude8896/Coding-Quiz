@@ -36,9 +36,8 @@ var playerDataObject = {
 
     //create function to display end page
     var SetEndPage = function () {
-
-        document.querySelector("answer-header").innerHTML = "";
        
+        document.querySelector(".answer-header").innerHTML = "";
 
         document.querySelector("div").id = "end-page";
 
