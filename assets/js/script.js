@@ -16,6 +16,8 @@ var CorrectAnswers = ["3. alerts", "3. parenthesis", "4. all of the above", "3. 
 var QuestionCycle = 0;
 var CurrentQuestion = [];
 
+// var countdownTimer = tim
+
 // set player object - with question, score and initials
 var playerDataObject = {
     question: 0,
@@ -31,9 +33,12 @@ var playerDataObject = {
         console.log("The initials input are :" + initials);
 
     };
-    
+
     //create function to display end page
     var SetEndPage = function () {
+
+        document.querySelector("answer-header").innerHTML = "";
+       
 
         document.querySelector("div").id = "end-page";
 
