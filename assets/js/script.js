@@ -22,7 +22,7 @@ var playerDataObject = {
     initials: "",
 
 }
-
+   
 
 
 
@@ -86,19 +86,8 @@ var playerDataObject = {
          }
      };
 
-     // function to display Correct message
-
-     var DisplayCorrectMessage = function() {
-        var HeaderCorrectAnswer = document.createElement("h3");
-        HeaderCorrectAnswer.classname = "answer-header";
-        HeaderCorrectAnswer.id = "answer-h3";
-        HeaderCorrectAnswer.innerHTML = "Correct!";
-        QuestionPageContent.appendChild(HeaderCorrectAnswer);
-        clearCurrentQuestionAnswers();
-     }
-
-
-         // Function to clar current answer and questions
+  
+         // Function to clear current answer and questions
 
     var clearCurrentQuestionAnswers = function () {
 
@@ -121,7 +110,15 @@ var playerDataObject = {
         SetQuizAnswers();
     };
 
+       // function to display Correct message
 
+       var DisplayCorrectMessage = function() {
+        var HeaderCorrectAnswer = document.createElement("h3");
+        HeaderCorrectAnswer.classname = "answer-header";
+        HeaderCorrectAnswer.id = "answer-h3";
+        HeaderCorrectAnswer.innerHTML = "Correct!";
+        QuestionPageContent.appendChild(HeaderCorrectAnswer);
+     }
      // function to display Wrong Message
 
      var DisplayWrongMessage = function () {
@@ -130,36 +127,29 @@ var playerDataObject = {
          HeaderWrongAnswer.id = "answer-h3";
          HeaderWrongAnswer.innerHTML = "Wrong!";
          QuestionPageContent.appendChild(HeaderWrongAnswer);
-         clearCurrentQuestionAnswers();
      }
 
     // check for correct answers
      var checkAnswers = function(event) {
-        QuestionPageContent.addEventListener("click", function(ButtonName){
-            console.log("button being clicked is ", ButtonName.target.id);
-            var ButtonID = ButtonName.target.id;
-
-            console.log("The ID of the button clicked is "+ ButtonID);
-
-            var CycleCorrectAnswer = QuestionCycle;
-            console.log("The correct answer should be at postion " + CycleCorrectAnswer);
-
-            if (ButtonID === CorrectAnswers[CycleCorrectAnswer]) {
-                DisplayCorrectMessage();
-                QuestionCycle = QuestionCycle++;
-                console.log(" The Correct answer for the question is " + CorrectAnswers[CycleCorrectAnswer]);
-                // clearCurrentQuestionAnswers();
-
-                } else {
-                DisplayWrongMessage();
-                QuestionCycle = QuestionCycle++;
-                console.log("The current Question Cycle is " + QuestionCycle);
-               }
-            
-        });
-        
     
-    };
+            var ButtonClickedName = event.target.innerText;
+            var currentAnswer = CorrectAnswers[QuestionCycle-1];
+            
+            if (ButtonClickedName === "Start Quiz"){
+                return;
+            }
+            if (ButtonClickedName === currentAnswer) {
+                DisplayCorrectMessage();
+                // QuestionCycle= QuestionCycle +1;
+                setTimeout(() => { clearCurrentQuestionAnswers(); }, 2000);
+
+
+            }  else {
+                DisplayWrongMessage();
+                // QuestionCycle = QuestionCycle++;
+                setTimeout(() => { clearCurrentQuestionAnswers(); }, 2000);
+        }
+    }
         
 
     
@@ -180,4 +170,4 @@ var sectionHandler = function () {
 };
 
 startQuizBtn.addEventListener("click", sectionHandler);
-QuestionPageContent/addEventListener("click", checkAnswers);
+QuestionPageContent.addEventListener("click", checkAnswers);
