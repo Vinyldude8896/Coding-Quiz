@@ -1,5 +1,6 @@
 var startQuizBtn = document.querySelector("#start-quiz");
 var QuestionPageContent = document.querySelector("#page-content");
+var EndPageContent = document.querySelector("#end-page");
 
 //Setting Variables for each question and the answers
 var Question1 = ["Commonly used data types DO Not include:", "1. strings", "2. booleans", "3. alerts", "4. numbers"];
@@ -21,8 +22,65 @@ var playerDataObject = {
     score: 0,
     initials: "",
 
-}
+};
    
+
+    var submitInitials = function (event) {
+
+        var intitals = document.querySelector("input.textcontent");
+        console.log("The initials input are :" + initials);
+
+    };
+    
+    //create function to display end page
+    var SetEndPage = function () {
+
+        document.querySelector("div").id = "end-page";
+
+        document.querySelector("h2").id = "end-header";
+        document.querySelector("h2").className = "end-page";
+        document.querySelector("h2").textContent = "All Done!";
+         
+        document.querySelector("p").id = "final-score";
+        document.querySelector("p").classname = "end-page";
+        document.querySelector("p").textContent = "Your final score is " + ".";
+
+
+        var EndPageContent = document.querySelector('#end-page');
+
+
+        var inputPretext = document.createElement("h2");
+        inputPretext.className = "input-line";
+        inputPretext.id = "input-initials";
+        inputPretext.innerHTML = "Enter initials:";
+        EndPageContent.appendChild(inputPretext);
+
+        var inputBoxInitials = document.createElement("input");
+        inputBoxInitials.className = "input-line";
+        inputBoxInitials.id = "input-box";
+        EndPageContent.appendChild(inputBoxInitials);
+
+        var submitInitials = document.createElement("button");
+        submitInitials.classname = "input-line";
+        submitInitials.id = "submit-initials";
+        submitInitials.innerText = "Submit";
+        EndPageContent.appendChild(submitInitials);
+        
+
+        // removing all current answers
+        for (i = 1; i < CurrentQuestion.length; i++) {
+            var deleteAnswer = document.getElementById("Answer + " + i );
+            deleteAnswer.remove();
+        };
+
+        // removing correct/wrong headers
+
+        var deleteAnswerResult = document.getElementById("answer-h3");
+            deleteAnswerResult.remove();
+
+        EndPageContent.addEventListener("click", submitInitials);
+
+    };
 
 
 
@@ -53,11 +111,10 @@ var playerDataObject = {
             CurrentQuestion = CurrentQuestion.concat(Question5);
         }
 
-        if (QuestionCycle > 4 ) {
-        } else {
-            // DisplayEndPage();
-           }
+        if (QuestionCycle === 5 ) {
 
+            SetEndPage();
+        }
         // change header function based on current question
         var QuestionPageHeader = document.createElement("h2");
         QuestionPageHeader.id = "New Question";
@@ -69,7 +126,8 @@ var playerDataObject = {
         QuestionCycle = QuestionCycle +1;
         console.log("Question Cycle Value is " + QuestionCycle);
         console.log(CurrentQuestion);
-    }
+
+    };
 
 
    // Function to create Quiz Questions on Main page
@@ -118,7 +176,7 @@ var playerDataObject = {
         HeaderCorrectAnswer.id = "answer-h3";
         HeaderCorrectAnswer.innerHTML = "Correct!";
         QuestionPageContent.appendChild(HeaderCorrectAnswer);
-     }
+     };
      // function to display Wrong Message
 
      var DisplayWrongMessage = function () {
@@ -127,7 +185,7 @@ var playerDataObject = {
          HeaderWrongAnswer.id = "answer-h3";
          HeaderWrongAnswer.innerHTML = "Wrong!";
          QuestionPageContent.appendChild(HeaderWrongAnswer);
-     }
+     };
 
     // check for correct answers
      var checkAnswers = function(event) {
@@ -141,15 +199,15 @@ var playerDataObject = {
             if (ButtonClickedName === currentAnswer) {
                 DisplayCorrectMessage();
                 // QuestionCycle= QuestionCycle +1;
-                setTimeout(() => { clearCurrentQuestionAnswers(); }, 2000);
+                setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
 
 
             }  else {
                 DisplayWrongMessage();
                 // QuestionCycle = QuestionCycle++;
-                setTimeout(() => { clearCurrentQuestionAnswers(); }, 2000);
+                setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
         }
-    }
+    };
         
 
     
@@ -161,6 +219,7 @@ var sectionHandler = function () {
     // changing status of current page items after button click
     document.querySelector("h2").textContent = "";
     document.querySelector("p").textContent = "";
+    document.querySelector('.button').classname = "disabled";
     document.querySelector('.button').style.display = 'none';
     QuestionPageContent.className = "question-content";
 

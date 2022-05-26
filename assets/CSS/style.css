@@ -131,6 +131,32 @@ header h1 {
 
 }
 
+/* Style for End Page Starts */
+
+.endpage h2{
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#final-score {
+    font-size: 25px;
+}
+
+
+#input-initials {
+    font-size: 25px;
+    font-weight: normal;
+    display: inline;
+    flex-wrap: nowrap;
+}
+
+#input-box {
+    display: inline;
+    flex-wrap: nowrap;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 35px;
+}
 
 
 
