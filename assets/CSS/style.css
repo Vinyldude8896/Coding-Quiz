@@ -158,7 +158,17 @@ header h1 {
     height: 35px;
 }
 
+#go-back {
+    display:flex;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+    margin-right: 10px;
+}
 
+#clear-high-scores {
+    display: inline;
+    margin-top: 10px;
+}
 
  /* style For Answer Headers ends*/
 .button:active {

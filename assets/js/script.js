@@ -2,6 +2,7 @@ var startQuizBtn = document.querySelector("#start-quiz");
 var QuestionPageContent = document.querySelector("#page-content");
 var EndPageContent = document.querySelector("#end-page");
 var finalPageContent = document.querySelector("#final-page");
+var viewhighscores = document.querySelector("#view-high-scores");
 const TimeCounter = document.querySelector("#page-timer");
 let TimeRemaining = 60;
 // TimeCounter.innerHTML = `Time: 00:${TimeRemaining}`;
@@ -45,9 +46,6 @@ var playerDataObject = {
         }, 1000);
     }
 
-
-
-
    
     // create function to set final page
     var setFinalPage = function () {
@@ -75,6 +73,17 @@ var playerDataObject = {
         ClearHighScoresButton.innerText = "Clear High Scores";
         finalPageContent.appendChild(ClearHighScoresButton);
 
+        goBackButton.addEventListener('click', function () {
+            location.reload();
+        });
+
+        localStorage.setItem("initials", JSON.stringify(playerDataObject.initials));
+        localStorage.setItem("score", JSON.stringify(playerDataObject.score));
+
+        ClearHighScoresButton.addEventListener('click', function () {
+            localStorage.clear();
+            window.alert("High Scores Cleared");
+        })
 
     }
 
@@ -114,13 +123,16 @@ var playerDataObject = {
 
         
         
+        // // // Need to fix this too ***
+       inputBoxInitials.addEventListener('change', function (){
+           inputvalue = (this.value);
+           console.log(inputvalue);
+           playerDataObject.initials = inputvalue;
+           console.log(playerDataObject.initials);
+       });
         
-        submitInitials.addEventListener("click", function() {
-            var getInputValue = document.getElementById("#input-initials").value;
-        console.log("Players Initials are" + getInputValue);
-        playerDataObject.initials = getInputValue;
-        setFinalPage();
-        });
+
+        submitInitials.addEventListener("click", setFinalPage);
     };  
 
 
@@ -223,8 +235,10 @@ var playerDataObject = {
          QuestionPageContent.appendChild(HeaderWrongAnswer);
 
          // adding penalty of ten seconds off timer fror wrong answer
-         TimeRemaining = TimeRemaining -10;
-     };
+         if (QuestionCycle < 5){
+             TimeRemaining = TimeRemaining -10;
+         }
+      };
 
     // check for correct answers
      var checkAnswers = function() {
@@ -274,10 +288,8 @@ var sectionHandler = function () {
 
 
 startQuizBtn.addEventListener("click", sectionHandler);
-// EndPageContent.addEventListener("click", function (event) {
-//     var ButtonClicked = event.target.innerHTML;
-
-//     if (ButtonClicked === "Submit") {
-//         setFinalPage();
-//     }
-// });
+viewhighscores.addEventListener("click", function(){
+   var initials = localStorage.getItem("initials");
+    var score = localStorage.getItem("score");
+    document.querySelector("#view-high-scores").innerHTML = '1.' + initials + '-' + score;
+});
