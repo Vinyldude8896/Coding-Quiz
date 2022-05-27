@@ -1,6 +1,9 @@
 var startQuizBtn = document.querySelector("#start-quiz");
 var QuestionPageContent = document.querySelector("#page-content");
 var EndPageContent = document.querySelector("#end-page");
+const TimeCounter = document.querySelector("#page-timer");
+let TimeRemaining = 60;
+// TimeCounter.innerHTML = `Time: 00:${TimeRemaining}`;
 
 //Setting Variables for each question and the answers
 var Question1 = ["Commonly used data types DO Not include:", "1. strings", "2. booleans", "3. alerts", "4. numbers"];
@@ -25,19 +28,47 @@ var playerDataObject = {
     initials: "",
 
 };
+    
+
+    function timer() {
+        var timer = setInterval(function() {
+            TimeCounter.innerHTML= "Time : 00:" + TimeRemaining;
+            TimeRemaining--;
+            if (TimeRemaining <0) {
+                clearInterval(timer);
+            }
+        }, 1000);
+    }
+
+    // function timerPenalty() {
+    //         for (i =1; 1 <=10; i++) {
+    //         TimeCounter.innerHTML= "Time : 00" + TimeRemaining -10;
+    //         TimeRemaining--;
+    //     };
+    // }
+
+
+    var clearEndPage = function () {
+
+        // // removing current Question
+        // const deleteQuestion = document.getElementById("New Question");
+        //   deleteQuestion.remove();
+
+        // removing all current answers
+        for (i = 1; i < CurrentQuestion.length; i++) {
+            var deleteAnswer = document.getElementById("Answer + " + i );
+            deleteAnswer.remove();
+        };
+
+        // // removing correct/wrong headers
+
+        // var deleteAnswerResult = document.getElementById("answer-h3");
+        //     deleteAnswerResult.remove();
+    }
    
-
-    var submitInitials = function (event) {
-
-        var intitals = document.querySelector("input.textcontent");
-        console.log("The initials input are :" + initials);
-
-    };
 
     //create function to display end page
     var SetEndPage = function () {
-       
-        document.querySelector(".answer-header").innerHTML = "";
 
         document.querySelector("div").id = "end-page";
 
@@ -47,11 +78,9 @@ var playerDataObject = {
          
         document.querySelector("p").id = "final-score";
         document.querySelector("p").classname = "end-page";
-        document.querySelector("p").textContent = "Your final score is " + ".";
-
+        document.querySelector("p").textContent = "Your final score is " + TimeRemaining + ".";
 
         var EndPageContent = document.querySelector('#end-page');
-
 
         var inputPretext = document.createElement("h2");
         inputPretext.className = "input-line";
@@ -62,6 +91,7 @@ var playerDataObject = {
         var inputBoxInitials = document.createElement("input");
         inputBoxInitials.className = "input-line";
         inputBoxInitials.id = "input-box";
+        inputBoxInitials.name = "input-initials"
         EndPageContent.appendChild(inputBoxInitials);
 
         var submitInitials = document.createElement("button");
@@ -69,22 +99,15 @@ var playerDataObject = {
         submitInitials.id = "submit-initials";
         submitInitials.innerText = "Submit";
         EndPageContent.appendChild(submitInitials);
+
+        clearEndPage();
+
+        submitInitials.addEventListener('click', function (getInputValue) {
+        var getInputValue = document.querySelector("input[name='input-initials']").value;
+        console.log("The Initials input are " + getInputValue);
+    })
         
-
-        // removing all current answers
-        for (i = 1; i < CurrentQuestion.length; i++) {
-            var deleteAnswer = document.getElementById("Answer + " + i );
-            deleteAnswer.remove();
-        };
-
-        // removing correct/wrong headers
-
-        var deleteAnswerResult = document.getElementById("answer-h3");
-            deleteAnswerResult.remove();
-
-        EndPageContent.addEventListener("click", submitInitials);
-
-    };
+    };  
 
 
 
@@ -128,9 +151,6 @@ var playerDataObject = {
 
         // adding 1 to QuestionCycle to set it to question 1
         QuestionCycle = QuestionCycle +1;
-        console.log("Question Cycle Value is " + QuestionCycle);
-        console.log(CurrentQuestion);
-
     };
 
 
@@ -140,7 +160,7 @@ var playerDataObject = {
     // Create buttons for all answers in question array    
         for (var i = 1; i < CurrentQuestion.length; i++) {
     
-       const AnswerButtons = document.createElement("button");
+       var AnswerButtons = document.createElement("button");
         AnswerButtons.className = "question-content";
         AnswerButtons.innerHTML = CurrentQuestion[i];
         AnswerButtons.id = "Answer + "+ i;
@@ -155,7 +175,7 @@ var playerDataObject = {
 
         // removing current Question
         const deleteQuestion = document.getElementById("New Question");
-        deleteQuestion.remove();
+          deleteQuestion.remove();
 
         // removing all current answers
         for (i = 1; i < CurrentQuestion.length; i++) {
@@ -192,7 +212,9 @@ var playerDataObject = {
      };
 
     // check for correct answers
-     var checkAnswers = function(event) {
+     var checkAnswers = function() {
+
+           QuestionPageContent.addEventListener("click", function (event) { 
     
             var ButtonClickedName = event.target.innerText;
             var currentAnswer = CorrectAnswers[QuestionCycle-1];
@@ -202,15 +224,14 @@ var playerDataObject = {
             }
             if (ButtonClickedName === currentAnswer) {
                 DisplayCorrectMessage();
-                // QuestionCycle= QuestionCycle +1;
                 setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
 
 
             }  else {
                 DisplayWrongMessage();
-                // QuestionCycle = QuestionCycle++;
                 setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
         }
+    });
     };
         
 
@@ -227,10 +248,12 @@ var sectionHandler = function () {
     document.querySelector('.button').style.display = 'none';
     QuestionPageContent.className = "question-content";
 
+    timer();
     SetQuizQuestion();
     SetQuizAnswers();
-   
+    checkAnswers();
 };
 
+
 startQuizBtn.addEventListener("click", sectionHandler);
-QuestionPageContent.addEventListener("click", checkAnswers);
+
