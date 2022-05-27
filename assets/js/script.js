@@ -1,6 +1,7 @@
 var startQuizBtn = document.querySelector("#start-quiz");
 var QuestionPageContent = document.querySelector("#page-content");
 var EndPageContent = document.querySelector("#end-page");
+var finalPageContent = document.querySelector("#final-page");
 const TimeCounter = document.querySelector("#page-timer");
 let TimeRemaining = 60;
 // TimeCounter.innerHTML = `Time: 00:${TimeRemaining}`;
@@ -37,37 +38,47 @@ var playerDataObject = {
             if (TimeRemaining <0) {
                 clearInterval(timer);
             }
+            if (QuestionCycle === 5) {
+                TimeRemaining++;
+                clearInterval(timer);
+            }
         }, 1000);
     }
 
-    // function timerPenalty() {
-    //         for (i =1; 1 <=10; i++) {
-    //         TimeCounter.innerHTML= "Time : 00" + TimeRemaining -10;
-    //         TimeRemaining--;
-    //     };
-    // }
 
 
-    var clearEndPage = function () {
 
-        // // removing current Question
-        // const deleteQuestion = document.getElementById("New Question");
-        //   deleteQuestion.remove();
-
-        // removing all current answers
-        for (i = 1; i < CurrentQuestion.length; i++) {
-            var deleteAnswer = document.getElementById("Answer + " + i );
-            deleteAnswer.remove();
-        };
-
-        // // removing correct/wrong headers
-
-        // var deleteAnswerResult = document.getElementById("answer-h3");
-        //     deleteAnswerResult.remove();
-    }
    
+    // create function to set final page
+    var setFinalPage = function () {
 
-    //create function to display end page
+        document.querySelector("h2").id = "final-page";
+        document.querySelector("h2").className = "final-page";
+        document.querySelector("h2").textContent = "High Scores";
+
+        document.querySelector("#input-initials").innerHTML = "";
+        document.querySelector("p").textContent = "";
+
+        document.querySelector("#submit-initials").style.display = "none";
+
+        document.querySelector("input").value = "1." + playerDataObject.initials + "-" + playerDataObject.score;
+
+        var finalPageContent = document.querySelector("#end-page");
+
+        var goBackButton = document.createElement("button");
+        goBackButton.id = "go-back";
+        goBackButton.innerText = "Go Back";
+        finalPageContent.appendChild(goBackButton);
+
+        var ClearHighScoresButton = document.createElement("button");
+        ClearHighScoresButton.id = "clear-high-scores";
+        ClearHighScoresButton.innerText = "Clear High Scores";
+        finalPageContent.appendChild(ClearHighScoresButton);
+
+
+    }
+
+    //create function to display end results page
     var SetEndPage = function () {
 
         document.querySelector("div").id = "end-page";
@@ -79,6 +90,7 @@ var playerDataObject = {
         document.querySelector("p").id = "final-score";
         document.querySelector("p").classname = "end-page";
         document.querySelector("p").textContent = "Your final score is " + TimeRemaining + ".";
+        playerDataObject.score = playerDataObject.score + TimeRemaining; 
 
         var EndPageContent = document.querySelector('#end-page');
 
@@ -95,18 +107,20 @@ var playerDataObject = {
         EndPageContent.appendChild(inputBoxInitials);
 
         var submitInitials = document.createElement("button");
-        submitInitials.classname = "input-line";
+        submitInitials.classname = "submit-button";
         submitInitials.id = "submit-initials";
         submitInitials.innerText = "Submit";
         EndPageContent.appendChild(submitInitials);
 
-        clearEndPage();
-
-        submitInitials.addEventListener('click', function (getInputValue) {
-        var getInputValue = document.querySelector("input[name='input-initials']").value;
-        console.log("The Initials input are " + getInputValue);
-    })
         
+        
+        
+        submitInitials.addEventListener("click", function() {
+            var getInputValue = document.getElementById("#input-initials").value;
+        console.log("Players Initials are" + getInputValue);
+        playerDataObject.initials = getInputValue;
+        setFinalPage();
+        });
     };  
 
 
@@ -137,12 +151,6 @@ var playerDataObject = {
             CurrentQuestion.length = 0;
             CurrentQuestion = CurrentQuestion.concat(Question5);
         }
-
-        if (QuestionCycle === 5 ) {
-
-            SetEndPage();
-        }
-        // change header function based on current question
         var QuestionPageHeader = document.createElement("h2");
         QuestionPageHeader.id = "New Question";
         QuestionPageHeader.classname = "question-content";
@@ -173,6 +181,10 @@ var playerDataObject = {
 
     var clearCurrentQuestionAnswers = function () {
 
+        if (QuestionCycle === 5) {
+            SetEndPage();
+        };
+
         // removing current Question
         const deleteQuestion = document.getElementById("New Question");
           deleteQuestion.remove();
@@ -187,7 +199,7 @@ var playerDataObject = {
 
         var deleteAnswerResult = document.getElementById("answer-h3");
             deleteAnswerResult.remove();
-    
+
         SetQuizQuestion();
         SetQuizAnswers();
     };
@@ -209,6 +221,9 @@ var playerDataObject = {
          HeaderWrongAnswer.id = "answer-h3";
          HeaderWrongAnswer.innerHTML = "Wrong!";
          QuestionPageContent.appendChild(HeaderWrongAnswer);
+
+         // adding penalty of ten seconds off timer fror wrong answer
+         TimeRemaining = TimeRemaining -10;
      };
 
     // check for correct answers
@@ -222,20 +237,23 @@ var playerDataObject = {
             if (ButtonClickedName === "Start Quiz"){
                 return;
             }
+            if (QuestionCycle === 5) {
+                setTimeout(() => {clearCurrentQuestionAnswers(); }, 1000); 
+            }
+
             if (ButtonClickedName === currentAnswer) {
                 DisplayCorrectMessage();
                 setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
-
-
-            }  else {
+            }
+              if (QuestionCycle < 6) {
+                  if (ButtonClickedName != currentAnswer ) {
                 DisplayWrongMessage();
                 setTimeout(() => { clearCurrentQuestionAnswers(); }, 1000);
-        }
+              }
+            }
+              
     });
     };
-        
-
-    
 
 
 // Section Handling area where first 'start quiz' button will replace items on page
@@ -256,4 +274,10 @@ var sectionHandler = function () {
 
 
 startQuizBtn.addEventListener("click", sectionHandler);
+// EndPageContent.addEventListener("click", function (event) {
+//     var ButtonClicked = event.target.innerHTML;
 
+//     if (ButtonClicked === "Submit") {
+//         setFinalPage();
+//     }
+// });
