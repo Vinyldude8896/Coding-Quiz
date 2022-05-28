@@ -23,8 +23,10 @@ var Question5 = ["A very useful tool used during development and debugging for p
 // setting variable to check for correct answers
 var CorrectAnswers = ["3. alerts", "3. parenthesis", "4. all of the above", "3. quotes", "4. console.log"];
 
-// setting cvariable to cycle through questions and set the current question
+// setting a variable to cycle through questions and set the current question
 var QuestionCycle = 0;
+
+//setting array to be populated with current question
 var CurrentQuestion = [];
 
 
