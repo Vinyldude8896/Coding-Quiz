@@ -34,8 +34,8 @@ var CurrentQuestion = [];
 // set player object - with question, score and initials
 var playerDataObject = {
     question: 0,
-    score: 0,
-    initials: "",
+    score: [],
+    initials: [],
 
 };
     
@@ -353,8 +353,10 @@ startQuizBtn.addEventListener("click", sectionHandler);
 
 // event listener to display high scores on click
 viewhighscores.addEventListener("click", function(){
-   var initials = localStorage.getItem("initials");
-    var score = localStorage.getItem("score");
-    document.querySelector("#view-high-scores").innerHTML ='1.' + initials + '-' + score;
+   var initials = JSON.parse(localStorage.getItem("initials"));
+    var score = JSON.parse(localStorage.getItem("score"));
+
+    document.querySelector("#view-high-scores").innerHTML = initials + " " + score;
+    setTimeout(() => {document.querySelector("#view-high-scores").innerHTML = "View High Scores"; }, 2000); 
 });
 
