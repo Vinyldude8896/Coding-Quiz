@@ -158,6 +158,7 @@ header h1 {
     height: 35px;
 }
 
+/* style for final page */
 #go-back {
     display:flex;
     flex-wrap: nowrap;
@@ -166,11 +167,12 @@ header h1 {
 }
 
 #clear-high-scores {
-    display: inline;
+    display: flex;
+    flex-wrap: nowrap;
     margin-top: 10px;
 }
 
- /* style For Answer Headers ends*/
+ 
 .button:active {
     cursor: default;
 }
