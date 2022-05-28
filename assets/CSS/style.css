@@ -1,6 +1,10 @@
+/* global styling properties */
+
 * {
     box-sizing: border-box;
 }
+
+/* Root Level Styling properties */
 
 :root {
     --primary_text: #333;
@@ -9,6 +13,8 @@
     --highlight_text_Bubble: #452c63;
 }
 
+
+/* Body Style Properties */
 body {
   background: #ededed;
   margin: 0;
@@ -17,6 +23,8 @@ body {
   flex-direction: column;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
+
+/* header properties start */
 
 header {
     display: flex;
@@ -40,6 +48,10 @@ header h1 {
 }
 
 
+/* header properties end */
+
+/* initial starting page properties start */
+
 .page-content-start {
     flex:1;
     display: flex;
@@ -52,7 +64,7 @@ header h1 {
 
 .page-content-start h2 {
     color: var(--primary_text);
-    font-size: 45px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -73,4 +85,106 @@ header h1 {
     background-color: var(--highlight_text_Bubble);
     font-size: 20px;
     padding: 10px 15px;
+}
+
+/* initial starting page properties end */
+
+
+/* question and answer page properties start */
+.question-content {
+    /* flex:1; */
+    display: inline;
+    flex-wrap: wrap;
+    /* align-items: left; */
+    justify-content: center;
+    margin: 5px auto;
+    width: 55%;
+}
+
+.question-content  h2 {
+    color: var(--primary_text);
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.question-content button {
+    outline: none;
+    border: none;
+    display: inline;
+    border-radius: 10px;
+    text-align: left;
+    justify-content: left;
+    color: var(--secondary_text);
+    background-color: var(--highlight_text_Bubble);
+    font-size: 15px;
+    padding: 10px 15px;
+}
+
+/* question and answer page properties start */
+
+/* style for answer headers h3 */
+
+.question-content h3 {
+    font-size: 30px;
+    color: darkgrey;
+    border-top: 3px solid darkgrey;
+
+}
+
+/* Style for End Page Starts */
+
+.endpage h2{
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#final-score {
+    font-size: 25px;
+}
+
+
+#input-initials {
+    font-size: 25px;
+    font-weight: normal;
+    display: inline;
+    flex-wrap: nowrap;
+}
+
+#input-box {
+    display: inline;
+    flex-wrap: nowrap;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 35px;
+}
+
+/* style for final page */
+#go-back {
+    display:flex;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#clear-high-scores {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+}
+
+ 
+.button:active {
+    cursor: default;
+}
+
+.page-content-start button:hover {
+    background-color: #CF9FFF;
+}
+
+.button:active {
+    cursor: default;
+}
+
+.question-content button:hover {
+    background-color: #CF9FFF;
 }
