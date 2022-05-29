@@ -159,17 +159,32 @@ header h1 {
 }
 
 /* style for final page */
+
+.finalButton-Container {
+    display: flex;    
+}
+
+#final-page-input {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 35px;
+
+}
+
 #go-back {
     display:flex;
     flex-wrap: nowrap;
     margin-top: 10px;
     margin-right: 10px;
+    width:25%;
 }
 
 #clear-high-scores {
     display: flex;
     flex-wrap: nowrap;
     margin-top: 10px;
+    width: 25%;
 }
 
  
