@@ -56,22 +56,29 @@ var playerDataObject = {
         document.querySelector("#submit-initials").style.display = "none";
 
         // setting the input box content to 1. and player's initials and player's score
+        document.querySelector("input").id = "final-page-input"
         document.querySelector("input").value = "1." + playerDataObject.initials + "-" + playerDataObject.score;
 
         // creating a variable to be able to select #end-page section for appending child elements
         var finalPageContent = document.querySelector("#end-page");
 
+        var finalPageButtonContainer = document.createElement("div");
+        finalPageButtonContainer.className = "finalButton-Container"
+        finalPageContent.appendChild(finalPageButtonContainer);
+
+        
+
         // creating and appending Go Back Button
         var goBackButton = document.createElement("button");
         goBackButton.id = "go-back";
         goBackButton.innerText = "Go Back";
-        finalPageContent.appendChild(goBackButton);
+        finalPageButtonContainer.appendChild(goBackButton);
 
         // creating and appending Clear High Scores Button
         var ClearHighScoresButton = document.createElement("button");
         ClearHighScoresButton.id = "clear-high-scores";
         ClearHighScoresButton.innerText = "Clear High Scores";
-        finalPageContent.appendChild(ClearHighScoresButton);
+        finalPageButtonContainer.appendChild(ClearHighScoresButton);
 
         // adding event listener to Go Back Button which will reload the page
         goBackButton.addEventListener('click', function () {
