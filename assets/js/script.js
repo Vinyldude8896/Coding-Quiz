@@ -59,6 +59,7 @@ var playerDataObject = {
         document.querySelector("input").id = "final-page-input"
         document.querySelector("input").value = "1." + playerDataObject.initials + "-" + playerDataObject.score;
 
+
         // creating a variable to be able to select #end-page section for appending child elements
         var finalPageContent = document.querySelector("#end-page");
 
@@ -334,13 +335,25 @@ var sectionHandler = function () {
    // Timer function to deduction time by 1 second
    function timer() {
     var timer = setInterval(function() {
-        TimeCounter.innerHTML= "Time : 00:" + TimeRemaining;
-        TimeRemaining--;
+       
+
+        if (TimeRemaining >= 10) {
+            TimeCounter.innerHTML= "Time : 00:" + TimeRemaining;
+            TimeRemaining--;
+        }
+
+        // if timer is less than 10 adding the extra 0
+        if (TimeRemaining < 10) {
+            TimeCounter.innerHTML= "Time : 00:0" + TimeRemaining;
+            TimeRemaining--;
+        }
 
         // if timer is = 0 then clear questions and go to end page
         if (TimeRemaining === 0) {
+            TimeCounter.innerHTML= "Time : 00:00";
             clearInterval(timer);
             clearCurrentQuestionAnswers();
+
         // if timer is less than 0 than return
         if (TimeRemaining < 0) {
             clearInterval(timer);
